@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BusinessModel, Categories, Product, ShoopingCart } from '../models/categories.model';
 import { CategoryService } from '../services/category.service';
+import { ShoopingCartComponent } from '../shooping-cart/shooping-cart.component';
 
 @Component({
   selector: 'app-category-items',
@@ -19,7 +21,8 @@ export class CategoryItemsComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
     ) { 
       this.route.params.subscribe(params => {
         this.categoryId = params['id'];
@@ -29,7 +32,10 @@ export class CategoryItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategoryItemsById();
+    this.getShoppingCart();
+  }
 
+  getShoppingCart() {
     this.categoryService.castShoppingCartList.subscribe(shopCart => this.shoopingCart = shopCart);
     console.log(this.shoopingCart);
     this.totatItemsInCart();
@@ -43,16 +49,33 @@ export class CategoryItemsComponent implements OnInit {
           if(s.id == this.categoryId){
             s.products.forEach(element => {
               element['quantity'] = 0;
+              element['checked'] = true;
             });
             this.products = s.products;
           }
           console.log(this.products)
+          this.getShoppingCartSavedItems();
         }) 
       })
   }
 
   addToShoppingCart(){
     this.categoryService.editShoppingCart(this.shoopingCart);
+  }
+
+  getShoppingCartSavedItems() {
+    if(this.shoopingCart.length > 0)
+    this.categoryService.castShoppingCartList.subscribe(res => {
+      this.shoopingCart = res;
+      res.forEach(ele => {
+        console.log(this.products);
+        this.products.forEach(element => {
+          if(ele.name == element.name){
+            element.quantity = ele.quantity;
+          }
+        })
+      })
+    })
   }
 
   addItem(index: any, product: Product) {
@@ -101,5 +124,16 @@ export class CategoryItemsComponent implements OnInit {
         this.totalItems += ele.quantity; 
       })
     }
+  }
+
+  openShoppingCart(){
+    const dialogRef = this.dialog.open(ShoopingCartComponent, {
+      width: '90%',
+      data: this.shoopingCart
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getShoppingCart();
+    });
   }
 }

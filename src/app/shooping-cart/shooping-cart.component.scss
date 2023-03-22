@@ -1,0 +1,10 @@
+.item-letter {
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #6750A4;
+}  

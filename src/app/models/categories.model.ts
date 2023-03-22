@@ -2,6 +2,7 @@ export interface Product {
     name: string;
     unitPrice: number;
     quantity: number; 
+    checked: boolean;
 }
 
 export interface Categories {
@@ -21,4 +22,5 @@ export interface ShoopingCart{
     name: string;
     unitPrice: number;
     quantity: number;
+    checked: boolean;
 }
