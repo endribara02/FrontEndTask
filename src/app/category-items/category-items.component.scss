@@ -1,0 +1,47 @@
+.badge-notify{
+    background:red;
+    position:relative;
+    top: -10px;
+    left: -4px;
+}
+
+.badge-notify1{
+    background:red;
+    position:relative;
+    top: -10px;
+    left: -13px;
+}
+
+.mr-2 {
+    margin-right: 10px;
+}
+
+::ng-deep.badge {
+    --bs-badge-padding-x: 0.7em;
+    --bs-badge-padding-y: 0.5em;
+    --bs-badge-font-size: 0.6em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: 0.6rem;
+}
+
+.item-letter {
+    background: red;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.decrement-btn {
+    background: red;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.increment-btn {
+    background: blue;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}

@@ -1,6 +1,7 @@
 export interface Product {
     name: string;
     unitPrice: number;
+    quantity: number; 
 }
 
 export interface Categories {
@@ -14,4 +15,10 @@ export interface BusinessModel {
     categories: Categories[];
     logo: string;
     nuis: string;
+}
+
+export interface ShoopingCart{
+    name: string;
+    unitPrice: number;
+    quantity: number;
 }

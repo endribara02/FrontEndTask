@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BusinessModel, Categories, Product, ShoopingCart } from '../models/categories.model';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-category-items',
@@ -7,9 +10,96 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryItemsComponent implements OnInit {
 
-  constructor() { }
+  products!: Product[];
+  categoryId: any;
+
+  shoopingCart!: ShoopingCart[];
+
+  totalItems = 0;
+
+  constructor(
+    private categoryService: CategoryService, 
+    private route: ActivatedRoute
+    ) { 
+      this.route.params.subscribe(params => {
+        this.categoryId = params['id'];
+        console.log(this.categoryId);
+      })
+    }
 
   ngOnInit(): void {
+    this.getCategoryItemsById();
+
+    this.categoryService.castShoppingCartList.subscribe(shopCart => this.shoopingCart = shopCart);
+    console.log(this.shoopingCart);
+    this.totatItemsInCart();
   }
 
+  getCategoryItemsById() {
+    this.categoryService.getCategories()
+      .subscribe((res: BusinessModel) => {
+        console.log(res);
+        res.categories.filter((s: Categories) => {
+          if(s.id == this.categoryId){
+            s.products.forEach(element => {
+              element['quantity'] = 0;
+            });
+            this.products = s.products;
+          }
+          console.log(this.products)
+        }) 
+      })
+  }
+
+  addToShoppingCart(){
+    this.categoryService.editShoppingCart(this.shoopingCart);
+  }
+
+  addItem(index: any, product: Product) {
+
+    this.totalItems = 0;
+
+    this.products[index].quantity += 1;
+    if(this.shoopingCart.length != 0){
+      let found = false;
+      this.shoopingCart.forEach(ele => {
+        if(ele.name == product.name){
+          found = true;
+        } 
+      });
+      if(!found){
+        this.shoopingCart.push(this.products[index]);
+      }
+    } else {
+      this.shoopingCart.push(this.products[index]);
+    }
+    this.addToShoppingCart();
+    this.totatItemsInCart();
+    console.log(this.shoopingCart);
+  }
+
+  removeItem(index: any, product: Product) {
+    this.products[index].quantity -= 1;
+
+    for(let i = 0; i < this.shoopingCart.length; i++) {
+      if(this.shoopingCart[i].name == product.name) {
+        if(this.shoopingCart[i].quantity == 0) {
+          this.shoopingCart.splice(i,1);
+        }
+      }
+    }
+    this.addToShoppingCart();
+    this.totatItemsInCart();
+    console.log(this.shoopingCart);
+  }
+
+  totatItemsInCart(){
+    this.totalItems = 0;
+    
+    if(this.shoopingCart.length != 0){
+      this.shoopingCart.forEach(ele => {
+        this.totalItems += ele.quantity; 
+      })
+    }
+  }
 }
