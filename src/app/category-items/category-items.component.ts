@@ -16,6 +16,7 @@ export class CategoryItemsComponent implements OnInit {
   categoryId: any;
 
   shoopingCart!: ShoopingCart[];
+  carouselItems: any = [];
 
   totalItems = 0;
 
@@ -58,6 +59,21 @@ export class CategoryItemsComponent implements OnInit {
           this.getShoppingCartSavedItems();
         }) 
       })
+  }
+
+  getCarouselItems() {
+    console.log(this.products);
+    let chunk = 6;
+
+    this.carouselItems= [];
+    for(var i = 0; i < this.products.length; i += chunk) {
+      let obj = {
+        'slide' :this.products.slice(i, i+chunk)
+      }
+      this.carouselItems.push(this.products.slice(i, i+chunk));
+    }
+
+    console.log(this.carouselItems)
   }
 
   addToShoppingCart(){
@@ -129,6 +145,7 @@ export class CategoryItemsComponent implements OnInit {
 
   openShoppingCart(){
     const dialogRef = this.dialog.open(ShoopingCartComponent, {
+      panelClass: 'div-bkg',
       width: '90%',
       data: this.shoopingCart
     });

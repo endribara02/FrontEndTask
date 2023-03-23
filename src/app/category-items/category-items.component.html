@@ -23,9 +23,7 @@
                         <div class="row">
                             <div class="col-4 d-flex align-items-center">
                                 <div class="item-letter mx-auto d-flex align-items-center" [ngStyle]="{'background': product.color}">
-                                    <span class="mx-auto text-white">{{product.name | firstCharacter}}</span>
-                                </div>
-                                <div>
+                                    <span class="mx-auto text-white" [ngClass]="{'pl-3': (product.quantity && product.quantity > 0)}">{{product.name | firstCharacter}}</span>
                                     <span *ngIf="product.quantity && product.quantity > 0" class="badge badge-notify1" >{{product.quantity}}</span>
                                 </div>
                             </div>

@@ -1,8 +1,9 @@
 .item-letter {
-    background-color: red;
+    background-color: #EADDFF;
     border-radius: 50%;
     height: 30px;
     width: 30px;
+    color: #21005D;
 }
 
 ::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
@@ -15,4 +16,8 @@
 
 .back-btn {
     color: #B3261E;
+}
+
+::ng-deep.mat-dialog-container {
+    padding: 0;
 }

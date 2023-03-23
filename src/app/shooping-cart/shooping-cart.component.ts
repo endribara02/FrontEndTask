@@ -37,6 +37,7 @@ export class ShoopingCartComponent implements OnInit {
   pay() {
     this.closeDialog();
     const dialogRef = this.dialog.open(SuccessPageComponent, {
+      panelClass: 'div-bkg',
       width: '90%',
       data: {title: "Fatura u pagua me sukses!", description: "Faleminderit qe na besuat"}
     });

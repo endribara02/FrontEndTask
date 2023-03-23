@@ -1,3 +1,7 @@
 .close-btn {
     color: #6750A4;
 }
+
+::ng-deep.mat-dialog-container {
+    padding: 0;
+}
