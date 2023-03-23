@@ -41,6 +41,17 @@ body {
       .category-item {
         background: var(--darkCategoryItem);
       }
+
+      .btn-fatura {
+        background: var(--whiteCategoryItem);
+      }
+
+      .input-text {
+        color: var(--darkText);
+      }
+      .fa-search {
+        color: var(--darkText);
+      }
     }
   }
   
@@ -67,6 +78,15 @@ body {
 
     .category-item {
       background: var(--darkCategoryItem);
+    }
+    .btn-fatura {
+      background: var(--whiteCategoryItem);
+    }
+    .input-text {
+      color: var(--darkText);
+    }
+    .fa-search {
+      color: var(--darkText);
     }
   }
 

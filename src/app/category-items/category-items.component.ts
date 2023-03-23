@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BusinessModel, Categories, Product, ShoopingCart } from '../models/categories.model';
 import { CategoryService } from '../services/category.service';
 import { ShoopingCartComponent } from '../shooping-cart/shooping-cart.component';
+import { Carousel } from "bootstrap";
 
 @Component({
   selector: 'app-category-items',
   templateUrl: './category-items.component.html',
   styleUrls: ['./category-items.component.scss']
 })
-export class CategoryItemsComponent implements OnInit {
+export class CategoryItemsComponent implements OnInit, AfterViewInit {
 
   products!: Product[];
   categoryId: any;
@@ -19,6 +21,10 @@ export class CategoryItemsComponent implements OnInit {
   carouselItems: any = [];
 
   totalItems = 0;
+
+  @ViewChild("carouselExampleSlidesOnly") carouselElement!: ElementRef<HTMLElement>;
+
+  carouselRef!: Carousel;
 
   constructor(
     private categoryService: CategoryService, 
@@ -34,6 +40,12 @@ export class CategoryItemsComponent implements OnInit {
   ngOnInit(): void {
     this.getCategoryItemsById();
     this.getShoppingCart();
+  }
+
+  ngAfterViewInit() {
+    this.carouselRef = new Carousel(this.carouselElement.nativeElement, {
+      interval: 500
+    });
   }
 
   getShoppingCart() {
@@ -56,7 +68,11 @@ export class CategoryItemsComponent implements OnInit {
             this.products = s.products;
           }
           console.log(this.products)
-          this.getShoppingCartSavedItems();
+          setTimeout(() => {
+            this.getShoppingCartSavedItems();
+            this.getCarouselItems();
+          }, 500);
+
         }) 
       })
   }
@@ -70,10 +86,20 @@ export class CategoryItemsComponent implements OnInit {
       let obj = {
         'slide' :this.products.slice(i, i+chunk)
       }
-      this.carouselItems.push(this.products.slice(i, i+chunk));
+      this.carouselItems.push(obj);
     }
 
     console.log(this.carouselItems)
+    console.log(this.carouselItems.length)
+    console.log(this.carouselItems[0].slide)
+  }
+
+  nextSlide() {
+    this.carouselRef.next();
+  }
+
+  prevSlide() {
+    this.carouselRef.prev();
   }
 
   addToShoppingCart(){
@@ -95,10 +121,10 @@ export class CategoryItemsComponent implements OnInit {
     })
   }
 
-  addItem(index: any, product: Product) {
+  addItem(i: any, j: any, product: Product) {
 
     this.totalItems = 0;
-
+    let index = i + (6 * j) 
     this.products[index].quantity += 1;
     if(this.shoopingCart.length != 0){
       let found = false;
@@ -118,13 +144,14 @@ export class CategoryItemsComponent implements OnInit {
     console.log(this.shoopingCart);
   }
 
-  removeItem(index: any, product: Product) {
+  removeItem(i: any, j: any, product: Product) {
+    let index = i + (6 * j) 
     this.products[index].quantity -= 1;
 
-    for(let i = 0; i < this.shoopingCart.length; i++) {
-      if(this.shoopingCart[i].name == product.name) {
-        if(this.shoopingCart[i].quantity == 0) {
-          this.shoopingCart.splice(i,1);
+    for(let k = 0; k < this.shoopingCart.length; k++) {
+      if(this.shoopingCart[k].name == product.name) {
+        if(this.shoopingCart[k].quantity == 0) {
+          this.shoopingCart.splice(k,1);
         }
       }
     }
@@ -146,7 +173,7 @@ export class CategoryItemsComponent implements OnInit {
   openShoppingCart(){
     const dialogRef = this.dialog.open(ShoopingCartComponent, {
       panelClass: 'div-bkg',
-      width: '90%',
+      width: '350px',
       data: this.shoopingCart
     });
 

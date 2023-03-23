@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FirstCharacterPipe } from './pipes/FirstCharacter.pipe';
 
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,8 @@ import { FirstCharacterPipe } from './pipes/FirstCharacter.pipe';
     MatInputModule,
     FormsModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,8 +9,8 @@
         <div class="d-flex justify-content-center mb-2">
             {{totali}} ALL
         </div>
-        <div class="container mt-2">
-            <div class="row border-bottom " *ngFor="let product of data; let i = index">
+        <div class="container mt-2 scroll-items">
+            <div class="row border-bottom" *ngFor="let product of data; let i = index">
                 <div class="col-2 item-letter d-flex align-items-center ">
                     <span class="mx-auto" style="font-size: 11px;">{{product.name | firstCharacter}}</span>
                 </div>
@@ -23,10 +23,10 @@
                     </mat-checkbox>
                 </div>
             </div>
-            <div class="d-flex justify-content-end">
-                <button class="btn back-btn" (click)="closeDialog()">Anullo</button>
-                <button class="btn pay-btn border-0" [disabled]="totali == 0" (click)="pay()">Paguaj</button>
-            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn back-btn btn-fatura m-1" (click)="closeDialog()">Anullo</button>
+            <button class="btn pay-btn border-0 btn-fatura m-1" [disabled]="totali == 0" (click)="pay()">Paguaj</button>
         </div>
     </div>
 </div>

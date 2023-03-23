@@ -12,10 +12,17 @@
 
 .pay-btn {
     color: #6750A4;
+    border-radius: 20px;
 }
 
 .back-btn {
     color: #B3261E;
+    border-radius: 20px;
+}
+
+.scroll-items {
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 ::ng-deep.mat-dialog-container {
