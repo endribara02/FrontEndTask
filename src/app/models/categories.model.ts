@@ -3,6 +3,7 @@ export interface Product {
     unitPrice: number;
     quantity: number; 
     checked: boolean;
+    color: string;
 }
 
 export interface Categories {

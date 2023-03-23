@@ -1,4 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+* {
+  --whiteTheme: rgb(253, 253, 253);
+  --darkTheme:  rgba(51, 51, 51, 0.8);
+  --darkText: #222;
+  --whiteText:  rgba(253, 253, 253, 0.897);
+  --darkCategoryItem: rgba(51, 51, 51, 0.882);
+  --whiteCategoryItem: rgba(253, 253, 253, 0.666);
+  }
+
+  :root {
+    color-scheme: light;
+  
+    .div-bkg {
+      background: var(--whiteTheme);
+      color: var(--darkText);
+    }
+
+    .category-item {
+      background: var(--whiteCategoryItem);
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      
+      .div-bkg {
+        background: var(--darkTheme) !important;
+        color: var(--whiteText) !important;
+      }
+
+      .category-item {
+        background: var(--darkCategoryItem);
+      }
+    }
+  }
+  
+  [color-scheme="light"] {
+    color-scheme: light;
+
+    .div-bkg {
+      background: var(--whiteTheme);
+      color: var(--darkText);
+    }
+
+    .category-item {
+      background: var(--whiteCategoryItem);
+    }
+  }
+  
+  [color-scheme="dark"] {
+    color-scheme: dark;
+  
+    .div-bkg {
+      background: var(--darkTheme) !important;
+      color: var(--whiteText) !important;
+    }
+
+    .category-item {
+      background: var(--darkCategoryItem);
+    }
+  }
+

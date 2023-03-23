@@ -1,12 +1,12 @@
 .badge-notify{
-    background:red;
+    background: #8C1D18;
     position:relative;
     top: -10px;
     left: -4px;
 }
 
 .badge-notify1{
-    background:red;
+    background: #8C1D18;
     position:relative;
     top: -10px;
     left: -13px;
@@ -35,19 +35,27 @@
     background: red;
     height: 40px;
     width: 40px;
+    min-width: 40px;
     border-radius: 50%;
 }
 
 .decrement-btn {
-    background: red;
+    background: #B3261E;
     height: 40px;
     width: 40px;
     border-radius: 50%;
 }
 
 .increment-btn {
-    background: blue;
+    background: #6750A4;
     height: 40px;
     width: 40px;
     border-radius: 50%;
 }
+
+.main {
+    overflow-x: hidden;
+}
+
+
+

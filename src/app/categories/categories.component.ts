@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusinessModel, Categories } from '../models/categories.model';
 import { CategoryService } from '../services/category.service';
+import { ColorSchemeE, defaultColorScheme, ColorThemeService } from '../services/color-theme.service';
 
 @Component({
   selector: 'app-categories',
@@ -13,14 +14,18 @@ export class CategoriesComponent implements OnInit {
   categories!: Categories[];
   categoriesBackup!: Categories[];
 
-  darkMode = false;
-
   searchInput: any;
+
+  currentTheme: ColorSchemeE;
 
   constructor(
     private categoryService: CategoryService, 
-    private router: Router
-    ) { }
+    private router: Router,
+    private colorThemeService: ColorThemeService
+    ) {
+      this.currentTheme = this.colorThemeService.get();
+      console.log(this.currentTheme);
+     }
 
   ngOnInit(): void {
 
@@ -44,5 +49,16 @@ export class CategoriesComponent implements OnInit {
 
   goToItems(id: any) {
     this.router.navigate(['/category-items',id])
+  }
+
+  changeTheme() {
+
+    if(this.currentTheme == ColorSchemeE.Light) {
+      this.colorThemeService.set(ColorSchemeE.Dark);
+      this.currentTheme = ColorSchemeE.Dark;
+    } else {
+      this.colorThemeService.set(ColorSchemeE.Light);
+      this.currentTheme = ColorSchemeE.Light;
+    }
   }
 }

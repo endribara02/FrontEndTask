@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FirstCharacterPipe } from './pipes/FirstCharacter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CategoriesComponent,
     CategoryItemsComponent,
     ShoopingCartComponent,
-    SuccessPageComponent
+    SuccessPageComponent,
+    FirstCharacterPipe
   ],
   imports: [
     BrowserModule,

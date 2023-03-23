@@ -50,6 +50,7 @@ export class CategoryItemsComponent implements OnInit {
             s.products.forEach(element => {
               element['quantity'] = 0;
               element['checked'] = true;
+              element['color'] = this.getRandomColor();
             });
             this.products = s.products;
           }
@@ -135,5 +136,9 @@ export class CategoryItemsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getShoppingCart();
     });
+  }
+
+  getRandomColor() {
+    return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1, 6);
   }
 }

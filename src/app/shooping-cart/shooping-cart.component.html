@@ -12,7 +12,7 @@
         <div class="container mt-2">
             <div class="row border-bottom " *ngFor="let product of data; let i = index">
                 <div class="col-2 item-letter d-flex align-items-center ">
-                    <span class="mx-auto text-white" style="font-size: 11px;">A</span>
+                    <span class="mx-auto text-white" style="font-size: 11px;">{{product.name | firstCharacter}}</span>
                 </div>
                 <div class="col-4">{{product.name}}</div>
                 <div class="col-4">{{product.quantity}} x {{product.unitPrice}}</div>
@@ -24,8 +24,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn text-danger" (click)="closeDialog()">Anullo</button>
-                <button class="btn text-primary border-0" [disabled]="totali == 0" (click)="pay()">Paguaj</button>
+                <button class="btn back-btn" (click)="closeDialog()">Anullo</button>
+                <button class="btn pay-btn border-0" [disabled]="totali == 0" (click)="pay()">Paguaj</button>
             </div>
         </div>
     </div>
