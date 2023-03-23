@@ -24,7 +24,6 @@ export class CategoriesComponent implements OnInit {
     private colorThemeService: ColorThemeService
     ) {
       this.currentTheme = this.colorThemeService.get();
-      console.log(this.currentTheme);
      }
 
   ngOnInit(): void {

@@ -33,7 +33,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
     ) { 
       this.route.params.subscribe(params => {
         this.categoryId = params['id'];
-        console.log(this.categoryId);
       })
     }
 
@@ -50,14 +49,12 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
 
   getShoppingCart() {
     this.categoryService.castShoppingCartList.subscribe(shopCart => this.shoopingCart = shopCart);
-    console.log(this.shoopingCart);
     this.totatItemsInCart();
   }
 
   getCategoryItemsById() {
     this.categoryService.getCategories()
       .subscribe((res: BusinessModel) => {
-        console.log(res);
         res.categories.filter((s: Categories) => {
           if(s.id == this.categoryId){
             s.products.forEach(element => {
@@ -67,7 +64,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
             });
             this.products = s.products;
           }
-          console.log(this.products)
           setTimeout(() => {
             this.getShoppingCartSavedItems();
             this.getCarouselItems();
@@ -78,7 +74,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
   }
 
   getCarouselItems() {
-    console.log(this.products);
     let chunk = 6;
 
     this.carouselItems= [];
@@ -88,10 +83,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
       }
       this.carouselItems.push(obj);
     }
-
-    console.log(this.carouselItems)
-    console.log(this.carouselItems.length)
-    console.log(this.carouselItems[0].slide)
   }
 
   nextSlide() {
@@ -111,7 +102,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
     this.categoryService.castShoppingCartList.subscribe(res => {
       this.shoopingCart = res;
       res.forEach(ele => {
-        console.log(this.products);
         this.products.forEach(element => {
           if(ele.name == element.name){
             element.quantity = ele.quantity;
@@ -141,7 +131,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
     }
     this.addToShoppingCart();
     this.totatItemsInCart();
-    console.log(this.shoopingCart);
   }
 
   removeItem(i: any, j: any, product: Product) {
@@ -157,7 +146,6 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
     }
     this.addToShoppingCart();
     this.totatItemsInCart();
-    console.log(this.shoopingCart);
   }
 
   totatItemsInCart(){

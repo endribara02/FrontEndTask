@@ -45,7 +45,6 @@ export class ShoopingCartComponent implements OnInit {
   }
 
   checkItem(checked: any, i: any) {
-    console.log(checked)
     this.data[i].checked = checked;
     this.getTotal()
   }
