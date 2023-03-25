@@ -27,11 +27,19 @@ body {
     .category-item {
       background: var(--whiteCategoryItem);
     }
+
+    body {
+      background:  var(--whiteTheme);
+    }
   }
   
   @media (prefers-color-scheme: dark) {
     :root {
       color-scheme: dark;
+
+      body {
+        background:  var(--darkTheme);
+      }
       
       .div-bkg {
         background: var(--darkTheme) !important;
@@ -66,11 +74,19 @@ body {
     .category-item {
       background: var(--whiteCategoryItem);
     }
+
+    body {
+      background:  var(--whiteTheme);
+    }
   }
   
   [color-scheme="dark"] {
     color-scheme: dark;
   
+    body {
+      background:  var(--darkTheme);
+    }
+    
     .div-bkg {
       background: var(--darkTheme) !important;
       color: var(--whiteText) !important;

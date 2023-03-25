@@ -1,8 +1,50 @@
-.close-btn {
+.btn {
     color: #6750A4;
     border-radius: 20px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: center;
+    margin-top: 30px;
+
 }
 
 ::ng-deep.mat-dialog-container {
     padding: 0;
+    border-radius: 28px;
+}
+
+::ng-deep.cdk-overlay-pane {
+    border-radius: 28px;
+}
+
+.main {
+    height: 200px;
+    left: 24px;
+    top: 294px;
+    background:  #6750A41C 11%;
+    border-radius: 28px;
+}
+
+.title {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+    // color: #1C1B1F
+}
+
+.description {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-align: left;
+    color: #49454F;
+
 }

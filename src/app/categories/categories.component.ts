@@ -16,15 +16,12 @@ export class CategoriesComponent implements OnInit {
 
   searchInput: any;
 
-  currentTheme: ColorSchemeE;
+  showSpinner = true;
 
   constructor(
     private categoryService: CategoryService, 
     private router: Router,
-    private colorThemeService: ColorThemeService
-    ) {
-      this.currentTheme = this.colorThemeService.get();
-     }
+    ) {}
 
   ngOnInit(): void {
 
@@ -36,28 +33,24 @@ export class CategoriesComponent implements OnInit {
       .subscribe((res: BusinessModel) => {
         this.categories = res.categories;
         this.categoriesBackup = res.categories;
+        this.showSpinner = false;
       })
   }
 
   searchFilter() {
     this.categories = this.categoriesBackup;
     if(this.searchInput != ''){
-      this.categories = this.categories.filter(s => s.name.toLowerCase().includes(this.searchInput.toLowerCase()));
+      this.categories = this.categories.filter((elem) => {
+        if(elem.name.toLowerCase().includes(this.searchInput.toLowerCase())) return elem.name.toLowerCase().includes(this.searchInput.toLowerCase())
+        else return  elem['products'].some((ele) => {
+        return ele.name.toLowerCase().includes(this.searchInput.toLowerCase())
+      
+        })
+      })
     } 
   }
 
   goToItems(id: any) {
     this.router.navigate(['/category-items',id])
-  }
-
-  changeTheme() {
-
-    if(this.currentTheme == ColorSchemeE.Light) {
-      this.colorThemeService.set(ColorSchemeE.Dark);
-      this.currentTheme = ColorSchemeE.Dark;
-    } else {
-      this.colorThemeService.set(ColorSchemeE.Light);
-      this.currentTheme = ColorSchemeE.Light;
-    }
   }
 }

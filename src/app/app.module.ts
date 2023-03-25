@@ -14,9 +14,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FirstCharacterPipe } from './pipes/FirstCharacter.pipe';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CategoryItemsComponent,
     ShoopingCartComponent,
     SuccessPageComponent,
-    FirstCharacterPipe
+    FirstCharacterPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     CarouselModule
   ],
   providers: [],

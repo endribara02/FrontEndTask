@@ -1,0 +1,15 @@
+.badge-notify{
+    background: #8C1D18;
+    position:relative;
+    top: -10px;
+    left: -4px;
+}
+
+::ng-deep.badge {
+    --bs-badge-padding-x: 0.7em;
+    --bs-badge-padding-y: 0.5em;
+    --bs-badge-font-size: 0.6em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: 0.6rem;
+}

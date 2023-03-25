@@ -1,23 +1,45 @@
+.main {
+    border-radius: 28px;
+    background: #6750A41C 11%;
+}
+
 .item-letter {
     background-color: #EADDFF;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     color: #21005D;
 }
 
 ::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: #6750A4;
-}  
+} 
+
+::ng-deep.cdk-overlay-pane {
+    border-radius: 28px;;
+}
 
 .pay-btn {
     color: #6750A4;
     border-radius: 20px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: center;
 }
 
 .back-btn {
     color: #B3261E;
     border-radius: 20px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: center;
+
 }
 
 .scroll-items {
@@ -25,6 +47,52 @@
     overflow-y: auto;
 }
 
+.headline {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.total {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.p-name {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.u-price {
+    font-family: Roboto;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+}
+
+.i-check {
+    display: flex;
+    align-items: center;
+}
+
 ::ng-deep.mat-dialog-container {
     padding: 0;
+    border-radius: 28px;
 }

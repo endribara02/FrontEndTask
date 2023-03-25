@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShoopingCart } from '../models/categories.model';
+import { CategoryService } from '../services/category.service';
 import { SuccessPageComponent } from '../shared/success-page/success-page.component';
 
 @Component({
@@ -13,9 +14,11 @@ export class ShoopingCartComponent implements OnInit {
   totali = 0;
   checked = true;
 
-  constructor(public dialogRef: MatDialogRef<ShoopingCartComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<ShoopingCartComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ShoopingCart[],
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.getTotal();
@@ -31,15 +34,28 @@ export class ShoopingCartComponent implements OnInit {
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    for(let i = 0; i < this.data.length; i++) {
+      if(this.data[i].checked == false) {
+        this.data.splice(i, 1); 
+      }
+    }
+    this.categoryService.editShoppingCart(this.data);
+    this.dialogRef.close(true);
   }
 
   pay() {
-    this.closeDialog();
+    for(let i = 0; i < this.data.length; i++) {
+      if(this.data[i].checked == false) {
+        this.data.splice(i, 1); 
+      }
+    }
+    this.categoryService.editShoppingCart(this.data);
+
+    this.dialogRef.close(false);
     const dialogRef = this.dialog.open(SuccessPageComponent, {
       panelClass: 'div-bkg',
-      width: '90%',
-      data: {title: "Fatura u pagua me sukses!", description: "Faleminderit qe na besuat"}
+      width: '312px',
+      data: {title: "Fatura e paguar me sukses", description: "Ju faleminderit qe na besuat"}
     });
 
   }

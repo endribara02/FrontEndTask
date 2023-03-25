@@ -6,11 +6,15 @@ import { BusinessModel, Categories, Product, ShoopingCart } from '../models/cate
 import { CategoryService } from '../services/category.service';
 import { ShoopingCartComponent } from '../shooping-cart/shooping-cart.component';
 import { Carousel } from "bootstrap";
+import { bounceInDownAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-category-items',
   templateUrl: './category-items.component.html',
-  styleUrls: ['./category-items.component.scss']
+  styleUrls: ['./category-items.component.scss'],
+  animations: [
+    bounceInDownAnimation()
+  ]
 })
 export class CategoryItemsComponent implements OnInit, AfterViewInit {
 
@@ -21,6 +25,10 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
   carouselItems: any = [];
 
   totalItems = 0;
+
+  showSpinner = true;
+
+  animationState: Array<boolean> = [false,false,false,false,false,false];
 
   @ViewChild("carouselExampleSlidesOnly") carouselElement!: ElementRef<HTMLElement>;
 
@@ -42,9 +50,16 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.carouselRef = new Carousel(this.carouselElement.nativeElement, {
-      interval: 500
-    });
+    // this.carouselRef = new Carousel(this.carouselElement.nativeElement, {
+    //   interval: 500
+    // });
+  }
+
+    animate(i: any) {
+    this.animationState[i] = false;
+    setTimeout(() => {
+      this.animationState[i] = true;
+    }, 1);
   }
 
   getShoppingCart() {
@@ -74,6 +89,7 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
   }
 
   getCarouselItems() {
+
     let chunk = 6;
 
     this.carouselItems= [];
@@ -83,6 +99,13 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
       }
       this.carouselItems.push(obj);
     }
+    this.showSpinner = false;
+    setTimeout(() => {
+      this.carouselRef = new Carousel(this.carouselElement.nativeElement, {
+        touch: true,
+        interval: 500
+      });
+    }, 100);
   }
 
   nextSlide() {
@@ -129,6 +152,7 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
     } else {
       this.shoopingCart.push(this.products[index]);
     }
+    // this.animate();
     this.addToShoppingCart();
     this.totatItemsInCart();
   }
@@ -166,11 +190,20 @@ export class CategoryItemsComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getShoppingCart();
+      this.showSpinner = true;
+      if(result){
+        this.carouselItems= [];
+        this.getCategoryItemsById();
+        this.getShoppingCart();
+      }
     });
   }
 
+  randomIntFromInterval() { 
+    return Math.floor(Math.random() * (180 - 70 + 1) + 100)
+  }
+
   getRandomColor() {
-    return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1, 6);
+    return "#" + ("0" + this.randomIntFromInterval().toString(16)).slice(-2) + ("0" + this.randomIntFromInterval().toString(16)).slice(-2) + ("0" + this.randomIntFromInterval().toString(16)).slice(-2);
   }
 }
