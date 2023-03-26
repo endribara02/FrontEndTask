@@ -11,8 +11,10 @@
         </div>
         <div class="container mt-2 scroll-items">
             <div class="row border-bottom" *ngFor="let product of data; let i = index">
-                <div class="col-2 item-letter d-flex align-items-center ">
-                    <span class="mx-auto" style="font-size: 11px;">{{product.name | firstCharacter}}</span>
+                <div class="col-2 d-flex align-items-center p-0">
+                    <div class="item-letter d-flex align-items-center ">
+                        <span class="mx-auto" style="font-size: 11px;">{{product.name | firstCharacter}}</span>
+                    </div>
                 </div>
                 <div class="col-5 p-name">{{product.name}}</div>
                 <div class="col-3 u-price">{{product.quantity}} x {{product.unitPrice}}</div>

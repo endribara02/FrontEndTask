@@ -22,3 +22,10 @@
     align-items: center;
     height: 100%;
 }
+
+::ng-deep.mat-progress-spinner svg {
+    width: 60px !important;
+    height: 60px !important;
+    color: rgba(253, 253, 253, 0.666);
+
+}
